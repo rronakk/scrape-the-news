@@ -28,8 +28,12 @@ app.use('/', indexRouter);
 app.use('/', articleRouter);
 app.use('/', commentRouter);
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapper";
+
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scrapper");
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
